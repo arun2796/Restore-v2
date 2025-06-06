@@ -9,6 +9,8 @@ namespace API.DataInitial;
 
 public class SeedData
 {
+
+    
     public static async Task SeedDataAsync(AppDbContext dbContext)
     {
         if (!dbContext.Products.Any())
