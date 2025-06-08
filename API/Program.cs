@@ -16,6 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 }
 );
+builder.Services.AddCors(options =>
+    options.AddPolicy("CustomPolicy", x =>
+        x.WithOrigins("https://localhost:3000") // ✅ no trailing slash, correct protocol (https)
+         .AllowAnyHeader()
+         .AllowAnyMethod()
+    ));
 
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -49,6 +55,9 @@ static async void UpdateDatabaseAsync(IHost host)
 
 
 var app = builder.Build();
+
+app.UseCors("CustomPolicy");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
