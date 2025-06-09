@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import type { IProduct } from "../../app/models/product";
+import { Link } from "react-router";
 
 type Prpos = {
   products: IProduct;
@@ -43,7 +44,9 @@ export default function ProductCard({ products }: Prpos) {
       </CardContent>
       <CardActions sx={{ justifyContent: "space-between" }}>
         <Button>Add to cart</Button>
-        <Button>View</Button>
+        <Button component={Link} to={`/catalog/${products.id}`}>
+          View
+        </Button>
       </CardActions>
     </Card>
   );

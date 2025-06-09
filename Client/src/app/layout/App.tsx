@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import type { IProduct } from "../models/product";
-import Catalog from "../../features/catalog/Catalog";
+import { useState } from "react";
+
 import {
   Box,
   Container,
@@ -9,9 +8,9 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import NavBar from "./NavBar";
+import { Outlet } from "react-router";
 
 function App() {
-  const [products, setproduct] = useState<IProduct[]>([]);
   const [darkthem, setdarthem] = useState(false);
   // const darkthem = true;
   const paletteType = darkthem ? "dark" : "light";
@@ -28,19 +27,6 @@ function App() {
     setdarthem(!darkthem);
   };
 
-  useEffect(() => {
-    const fetchdata = async () => {
-      try {
-        const context = await fetch("https://localhost:5166/api/Product"); // use HTTPS here too
-        const data = await context.json();
-        setproduct(data);
-      } catch (error) {
-        console.log(error, " fetch error");
-      }
-    };
-    fetchdata();
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -55,7 +41,7 @@ function App() {
         }}
       >
         <Container maxWidth="xl" sx={{ marginTop: 8 }}>
-          <Catalog products={products} />
+          <Outlet />
         </Container>
       </Box>
     </ThemeProvider>
