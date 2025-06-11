@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import type { IProduct } from "../../app/models/product";
+
 import {
   Button,
   Divider,
@@ -13,10 +12,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useFetchproductDetailsQuery } from "./catalogApi";
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const [product, setproduct] = useState<IProduct | null>(null);
+
+  const { data: product, isLoading } = useFetchproductDetailsQuery(
+    id ? parseInt(id) : 0
+  );
+
   const productDetais = [
     { label: "Name", value: product?.name },
     { label: "Descirption", value: product?.descirption },
@@ -25,27 +29,14 @@ export default function ProductDetails() {
     { label: "QuantityInStock ", value: product?.quantityInStock },
   ];
 
-  useEffect(() => {
-    const fetchdata = async () => {
-      try {
-        const context = await fetch(`https://localhost:5166/api/Product/${id}`);
-        const data = await context.json();
-        setproduct(data);
-      } catch (error) {
-        console.log(error, " fetch error");
-      }
-    };
-    fetchdata();
-  }, [id]);
-
-  if (!product) return <div>Loading....</div>;
+  if (!product || isLoading) return <div>Loading....</div>;
   return (
     <Grid2 container spacing={6} maxWidth="lg" sx={{ mx: "auto" }}>
       <Grid2 size={6}>
         <img
           src={product?.pictureUrl}
           alt={product.name}
-          style={{ width: "100%" }}
+          style={{ width: "100%", borderRadius: 8 }}
         />
       </Grid2>
       <Grid2 size={6}>

@@ -8,7 +8,14 @@ type Props = {
 
 export default function ProductList({ products }: Props) {
   return (
-       <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 3 }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: 3,
+      }}
+    >
       {products.map((product) => (
         <ProductCard key={product.id} products={product} />
       ))}
