@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export type counterstate = {
   data: number;
 };
-const initialState: counterstate = {
+const initialState: counterstate= {
   data: 0,
 };
 

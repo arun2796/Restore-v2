@@ -2,8 +2,6 @@
 using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-
-
 namespace API.Middleware;
 
 public class MiddlewareException(IHostEnvironment host, ILogger<MiddlewareException> logger) : IMiddleware

@@ -1,5 +1,3 @@
-
-
 import {
   Box,
   Container,
@@ -8,7 +6,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import NavBar from "./NavBar";
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import { UseAppSelector } from "../store/store";
 
 function App() {
@@ -36,7 +34,7 @@ function App() {
           py: 6,
         }}
       >
-        <Container maxWidth="xl" sx={{ marginTop: 8 }}>
+        <Container maxWidth="xl" sx={{ marginTop: 10 }}>
           <Outlet />
         </Container>
       </Box>

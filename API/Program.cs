@@ -25,7 +25,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 
 builder.Services.AddCors(options =>
     options.AddPolicy("CustomPolicy", x =>
-        x.WithOrigins("https://localhost:3000")
+        x.WithOrigins("https://localhost:3000").AllowCredentials()
          .AllowAnyHeader()
          .AllowAnyMethod()
     ));

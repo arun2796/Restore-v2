@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import { router } from "../routes/Routes";
 
 const customebaseurl=fetchBaseQuery({
-    baseUrl:"https://localhost:5166/api"
+    baseUrl:"https://localhost:5166/api",
+    credentials:"include"
 });
 
 
@@ -20,7 +21,7 @@ export const baseQueryWithError=async ( arg:string| FetchArgs,api:BaseQueryApi,e
    api.dispatch(StopLoading());
 
     if(result.error){
-      const statusCode =
+    const statusCode =
      result.error?.status === "PARSING_ERROR" && result.error?.originalStatus
     ? result.error.originalStatus
     : result.error?.status;
