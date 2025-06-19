@@ -1,16 +1,45 @@
-import { Fragment } from "react/jsx-runtime";
 import ProductList from "./ProductList";
-import { useFetchproductQuery } from "./catalogApi";
+import { useFetchFilterQuery, useFetchproductQuery } from "./catalogApi";
+import Grid2 from "@mui/material/Grid2";
+import Filters from "./Filters";
+import { UseAppDispatch, UseAppSelector } from "../../app/store/store";
+import AddPagination from "../../app/shared/component/AddPagination";
+import { setPageNumber } from "./catalogslice";
+import { Typography } from "@mui/material";
 
 function Catalog() {
-  const { data, isLoading } = useFetchproductQuery();
+  const productparams = UseAppSelector((state) => state.catalog);
+  const { data, isLoading } = useFetchproductQuery(productparams);
+  const { data: filterdata, isLoading: Filterloading } = useFetchFilterQuery();
+  const dispatch = UseAppDispatch();
 
-  if (isLoading || !data) return <div>Loading.....</div>;
+  if (isLoading || !data || Filterloading || !filterdata)
+    return <div>Loading.....</div>;
 
   return (
-    <Fragment>
-      <ProductList products={data} />
-    </Fragment>
+    <Grid2 container spacing={3}>
+      <Grid2 size={3}>
+        <Filters filterdata={filterdata} />
+      </Grid2>
+      <Grid2 size={9}>
+        {data.item && data.item.length > 0 ? (
+          <>
+            <ProductList products={data.item} />
+            <AddPagination
+              metadata={data.pagination}
+              onChangePage={(page: number) => {
+                dispatch(setPageNumber(page));
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            />
+          </>
+        ) : (
+          <Typography variant="h5">
+            There is no result found in this filter
+          </Typography>
+        )}
+      </Grid2>
+    </Grid2>
   );
 }
 

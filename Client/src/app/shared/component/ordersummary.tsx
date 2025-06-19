@@ -18,7 +18,7 @@ export default function OrderSummary() {
       (sum: number, item: Item) => sum + item.quantity * item.price,
       0
     ) || 0;
-  const deliveryFee = subtotal > 10000 ? 0 : 500;
+  const deliveryFee = subtotal > 100000 ? 0 : 5000;
 
   return (
     <Box

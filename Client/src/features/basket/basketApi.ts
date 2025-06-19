@@ -6,8 +6,6 @@ import type { IProduct } from "../../app/models/product";
 const IsBasktItems = (product: IProduct | Item): product is Item => {
     return (product as Item).quantity !== undefined;
 }
-
-
 export const basketApi =createApi({
     reducerPath:'basketApi',
     baseQuery:baseQueryWithError,
@@ -26,7 +24,6 @@ export const basketApi =createApi({
                  url:`basket?productId=${ProductId}&quantity=${quantity}`,
                 method:"POST"
                }
-                
             },
             onQueryStarted:async({product,quantity},{dispatch,queryFulfilled})=>{
                 let isNewBasket=false;
