@@ -8,7 +8,6 @@ namespace API.Extension;
 public static class HttpExtension
 {
 
-
     public static void AddPaginationheader(this HttpResponse response, PaginationMetaData metaData)
     {
         var options = new JsonSerializerOptions

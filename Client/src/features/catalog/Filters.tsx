@@ -3,7 +3,7 @@ import { Button, Paper } from "@mui/material";
 import { Box } from "@mui/system";
 import Search from "./search";
 import RadioButtonGroup from "../../app/shared/component/RadioButtonGroup";
-import { UseAppDispatch, UseAppSelector } from "../../app/store/store";
+import { UseAppDispatch, UseAppSelector } from "../../app/store/hook";
 import { setBrands, setOrderBy, setresetParams, setType } from "./catalogslice";
 import CheckboxButton from "../../app/shared/component/CheckboxButton";
 

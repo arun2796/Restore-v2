@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using API.Data;
 using API.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +10,42 @@ namespace API.DataInitial;
 
 public class SeedData
 {
-    public static async Task SeedDataAsync(AppDbContext dbContext)
+    public static async Task SeedDataAsync(AppDbContext dbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
     {
+        if (!dbContext.Database.IsSqlServer())
+        {
+            throw new Exception("Database is not SQL Server");
+        }
+
+        await dbContext.Database.MigrateAsync();
+
+        if (!dbContext.Users.Any())
+        {
+            if (!await roleManager.RoleExistsAsync("Admin"))
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+
+            if (!await roleManager.RoleExistsAsync("Member"))
+                await roleManager.CreateAsync(new IdentityRole("Member"));
+
+            var user = new User
+            {
+                UserName = "admin",
+                Email = "admin@example.com",
+
+            };
+            await userManager.CreateAsync(user, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(user, "Admin");
+
+            var member = new User
+            {
+                UserName = "member",
+                Email = "member@example.com",
+
+            };
+            await userManager.CreateAsync(member, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(member, ["Member", "Admin"]);
+        }
+
         if (!dbContext.Products.Any())
         {
             await dbContext.AddRangeAsync(

@@ -2,6 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithError } from "../../app/api/baseapi";
 import { Item, type Basket } from "../../app/models/Basket";
 import type { IProduct } from "../../app/models/product";
+import { toast } from "react-toastify";
 
 const IsBasktItems = (product: IProduct | Item): product is Item => {
     return (product as Item).quantity !== undefined;
@@ -29,7 +30,9 @@ export const basketApi =createApi({
                 let isNewBasket=false;
               const patchresult=dispatch(
                 basketApi.util.updateQueryData("fetchBasket",undefined,(draft)=>{
+                   
                  const ProductId=IsBasktItems(product)?product.productId:product.id
+
                  if(!draft?.basketId) isNewBasket=true;
                     if(!isNewBasket){
                         const exrictingItem=draft.items.find(x=>x.productId===ProductId)
@@ -39,14 +42,19 @@ export const basketApi =createApi({
                         draft.items.push(IsBasktItems(product)?product:{...product,productId:product.id,quantity})
                     }
                     }
+                     
                 })
+               
               )
                 try {
                     await queryFulfilled;
+                    toast.success("Item added to basket!");
                 if(isNewBasket)   dispatch(basketApi.util.invalidateTags(["Basket"]))
+                    
                 } catch (error) {
                     patchresult.undo();
-                    console.log(error);
+                    toast.error("Failed to add item.");
+                    console.log(error);     
                 }
             }
         }),

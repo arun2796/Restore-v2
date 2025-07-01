@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export type counterstate = {
   data: number;
 };
-const initialState: counterstate= {
+const initialState: counterstate = {
   data: 0,
 };
 
@@ -17,10 +17,13 @@ export const counterSlice = createSlice({
     decrement: (state, action) => {
       state.data -= action.payload;
     },
+    rest: (state, action) => {
+      state.data = action.payload;
+    },
   },
 });
 
-export const { increment, decrement } = counterSlice.actions;
+export const { increment, decrement, rest } = counterSlice.actions;
 
 // export function incrementlegacy(amount = 1) {
 //   return {

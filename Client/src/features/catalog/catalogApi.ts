@@ -6,7 +6,6 @@ import { FilterValueEmpty } from "../lib/unit";
 import type { IPagination } from "../../app/models/Pagination";
 
 
-
 export const catalogApi=createApi({
     reducerPath:'catalogApi',
     baseQuery:baseQueryWithError,
@@ -22,7 +21,6 @@ export const catalogApi=createApi({
                 const pagination=fetchpagination? JSON.parse(fetchpagination):null;
                 return{item ,pagination}
             },
-             
         }),
         fetchproductDetails:builder.query<IProduct,number>({
             query:(productid)=>`/product/${productid}`

@@ -11,9 +11,11 @@ import {
 
 import { Link, NavLink } from "react-router-dom";
 import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
-import { UseAppDispatch, UseAppSelector } from "../store/store";
+import { UseAppDispatch, UseAppSelector } from "../store/hook";
 import { SetdarkMode } from "./uiSlice";
 import { useFetchBasketQuery } from "../../features/basket/basketApi";
+import Usermenu from "./Usermenu";
+import { useUserinfoQuery } from "../../features/account/accountApi";
 
 const navstyle = {
   color: "inherit",
@@ -38,6 +40,7 @@ const rightlink = [
 ];
 
 export default function NavBar() {
+  const { data: user } = useUserinfoQuery();
   const { isloading, darkmode } = UseAppSelector((state) => state.ui);
   const dispatch = UseAppDispatch();
 
@@ -85,14 +88,22 @@ export default function NavBar() {
               <ShoppingCart />
             </Badge>
           </IconButton>
-
-          <List sx={{ display: "flex", justifyContent: "end" }}>
-            {rightlink.map(({ Title, path }) => (
-              <ListItem component={NavLink} to={path} key={path} sx={navstyle}>
-                {Title.toUpperCase()}
-              </ListItem>
-            ))}
-          </List>
+          {user ? (
+            <Usermenu user={user} />
+          ) : (
+            <List sx={{ display: "flex", justifyContent: "end" }}>
+              {rightlink.map(({ Title, path }) => (
+                <ListItem
+                  component={NavLink}
+                  to={path}
+                  key={path}
+                  sx={navstyle}
+                >
+                  {Title.toUpperCase()}
+                </ListItem>
+              ))}
+            </List>
+          )}
         </Box>
       </Toolbar>
       {isloading && (

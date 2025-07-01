@@ -12,7 +12,7 @@ public static class BasketExtensionDto
         {
             BasketId = basket.BasketId,
 
-            Items = basket.Items.Select(x => new BasketItemDto
+            Items =  basket.Items.Select(x => new BasketItemDto
             {
                 ProductId = x.ProductId,
                 Name = x.Products.Name,

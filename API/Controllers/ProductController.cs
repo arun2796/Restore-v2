@@ -35,6 +35,14 @@ namespace API.Controllers
             return product;
             // return Ok(new { item = product, product.MetaData });
         }
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetFilter()
+        {
+            var brand = await _dbContext.Products.Select(x => x.Brand).Distinct().ToListAsync();
+            var Type = await _dbContext.Products.Select(x => x.Type).Distinct().ToListAsync();
+
+            return Ok(new { brand, Type });
+        }
         [HttpGet("{id}")]
 
         public async Task<ActionResult<Product>> GetByIdProduct(int id)
@@ -49,16 +57,5 @@ namespace API.Controllers
             return context;
 
         }
-        [HttpGet("filter")]
-
-        public async Task<IActionResult> GetFilter()
-        {
-            var brand = await _dbContext.Products.Select(x => x.Brand).Distinct().ToListAsync();
-            var Type = await _dbContext.Products.Select(x => x.Type).Distinct().ToListAsync();
-
-            return Ok(new { brand, Type });
-        }
-
-
     }
 }

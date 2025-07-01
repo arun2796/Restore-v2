@@ -3,12 +3,11 @@ import type { ProductsParams } from "../../app/models/ProductParams";
 
 const initialState:ProductsParams={
     PageNumber:1,
-    PageSize:5,
+    PageSize:6,
     brands:[],
     types:[],
     searchName:"",
-    orderBy:"name"
-    
+    orderBy:"name"  
 }
 
 export const catalogSlice=createSlice({
@@ -16,7 +15,7 @@ export const catalogSlice=createSlice({
     initialState,
     reducers:{
         setPageNumber(state,action){
-            state.PageNumber=action.payload
+             state.PageNumber=action.payload
         },
         setPageSize(state,action){
             state.PageSize=action.payload

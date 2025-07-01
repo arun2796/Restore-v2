@@ -2,10 +2,11 @@ import ProductList from "./ProductList";
 import { useFetchFilterQuery, useFetchproductQuery } from "./catalogApi";
 import Grid2 from "@mui/material/Grid2";
 import Filters from "./Filters";
-import { UseAppDispatch, UseAppSelector } from "../../app/store/store";
+
 import AddPagination from "../../app/shared/component/AddPagination";
 import { setPageNumber } from "./catalogslice";
 import { Typography } from "@mui/material";
+import { UseAppDispatch, UseAppSelector } from "../../app/store/hook";
 
 function Catalog() {
   const productparams = UseAppSelector((state) => state.catalog);

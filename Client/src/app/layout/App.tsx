@@ -6,8 +6,8 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import NavBar from "./NavBar";
-import { Outlet, ScrollRestoration,  } from "react-router-dom";
-import { UseAppSelector } from "../store/store";
+import { Outlet, ScrollRestoration } from "react-router-dom";
+import { UseAppSelector } from "../store/hook";
 
 function App() {
   const { darkmode } = UseAppSelector((state) => state.ui);

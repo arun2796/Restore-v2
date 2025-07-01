@@ -1,6 +1,6 @@
-import { decrement, increment } from "./counterReducer";
+import { decrement, increment, rest } from "./counterReducer";
 import { Button, ButtonGroup, Typography } from "@mui/material";
-import { UseAppDispatch, UseAppSelector } from "../../app/store/store";
+import { UseAppDispatch, UseAppSelector } from "../../app/store/hook";
 
 export default function ContactPages() {
   const { data } = UseAppSelector((state) => state.counter);
@@ -16,7 +16,7 @@ export default function ContactPages() {
         <Button color="secondary" onClick={() => dispatch(decrement(1))}>
           Decrement
         </Button>
-        <Button color="info" onClick={() => dispatch({ type: "reset" })}>
+        <Button color="info" onClick={() => dispatch(rest(0))}>
           Reset
         </Button>
         <Button color="primary" onClick={() => dispatch(increment(5))}>

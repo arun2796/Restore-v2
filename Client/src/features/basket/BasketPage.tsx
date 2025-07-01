@@ -1,4 +1,4 @@
-import { Grid2, Typography } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import { useFetchBasketQuery } from "./basketApi";
 import BasketItems from "./BasketItems";
 import OrderSummary from "../../app/shared/component/ordersummary";
@@ -18,6 +18,8 @@ export default function BasketPage() {
       </Grid2>
       <Grid2 size={4}>
         <OrderSummary />
+        <Box>{data.basketId}</Box>
+       
       </Grid2>
     </Grid2>
   );

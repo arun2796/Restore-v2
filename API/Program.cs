@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DataInitial;
 using API.Middleware;
+using API.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -33,28 +35,36 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddTransient<MiddlewareException>();
 
+builder.Services.AddIdentityApiEndpoints<User>(opt =>
+{
+    opt.User.RequireUniqueEmail = true;
+
+}).AddRoles<IdentityRole>()
+  .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 static async void UpdateDatabaseAsync(IHost host)
 {
-    using (var scope = host.Services.CreateScope())
+    using var scope = host.Services.CreateScope();
+    var Service = scope.ServiceProvider;
+    try
     {
-        var Service = scope.ServiceProvider;
-        try
+        var context = Service.GetRequiredService<AppDbContext>();
+        var userManager = Service.GetRequiredService<UserManager<User>>();
+        var roleManager = Service.GetRequiredService<RoleManager<IdentityRole>>();
+        if (context.Database.IsSqlServer())
         {
-            var context = Service.GetRequiredService<AppDbContext>();
-            if (context.Database.IsSqlServer())
-            {
-                context.Database.Migrate();
-            }
-            await SeedData.SeedDataAsync(context);
+            context.Database.Migrate();
         }
-        catch (Exception ex)
-        {
-            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-            logger.LogError(ex, "error occurred while migration or seeding the database");
-        }
+        await SeedData.SeedDataAsync(context, userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "error occurred while migration or seeding the database");
     }
 }
 
@@ -72,11 +82,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGroup("/api").MapIdentityApi<User>();
 
-UpdateDatabaseAsync(app);
+// Update the database and seed data
+ UpdateDatabaseAsync(app);
 
 app.Run();
 

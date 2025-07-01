@@ -1,4 +1,4 @@
- /* eslint-disable no-debugger */
+
 import  { fetchBaseQuery, type BaseQueryApi, type FetchArgs } from "@reduxjs/toolkit/query";
 import { StartLoading, StopLoading } from "../layout/uiSlice";
 import { toast } from "react-toastify";
@@ -6,7 +6,8 @@ import { router } from "../routes/Routes";
 
 const customebaseurl=fetchBaseQuery({
     baseUrl:"https://localhost:5166/api",
-    credentials:"include"
+    credentials:"include",
+
 });
 
 
@@ -56,7 +57,7 @@ export const baseQueryWithError=async ( arg:string| FetchArgs,api:BaseQueryApi,e
         //       console.log( typeof responsedata);
         //    break;  
         case 500: {
-  debugger;
+
   let parsedError = responsedata;
 
   if (typeof responsedata === 'string') {

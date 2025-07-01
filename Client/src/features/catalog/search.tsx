@@ -1,5 +1,5 @@
 import { debounce, TextField } from "@mui/material";
-import { UseAppDispatch, UseAppSelector } from "../../app/store/store";
+import { UseAppDispatch, UseAppSelector } from "../../app/store/hook";
 import { setSearchName } from "./catalogslice";
 import { useEffect, useState } from "react";
 

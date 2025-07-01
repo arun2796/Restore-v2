@@ -3,7 +3,6 @@ using API.Model;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extension;
-
 public static class ProductExtension
 {
     public static IQueryable<Product> Sort(this IQueryable<Product> products, string? OrderBy)
@@ -15,9 +14,7 @@ public static class ProductExtension
             _ => products.OrderBy(x => x.Name)
         };
         return products;
-
     }
-
     public static IQueryable<Product> Search(this IQueryable<Product> products, string? searchName)
     {
         if (string.IsNullOrEmpty(searchName)) return products;
@@ -25,7 +22,6 @@ public static class ProductExtension
         var lowerCaseSearchTerm = searchName.Trim().ToLower();
         return products.Where(x => x.Name.Contains(lowerCaseSearchTerm));
     }
-
     public static IQueryable<Product> Filter(this IQueryable<Product> products, string? brand, string? type)
     {
         var brandList = new List<string>();
