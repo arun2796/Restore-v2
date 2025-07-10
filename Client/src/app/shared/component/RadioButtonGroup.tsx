@@ -21,7 +21,7 @@ export default function RadioButtonGroup({
   return (
     <FormControl>
       <RadioGroup onChange={onchange} value={selectedvalue} sx={{ my: 3 }}>
-        {option.map(({ value, label }) => (
+        {option.map(({ value, label }) => ( 
           <FormControlLabel
             key={label}
             control={<Radio color="secondary" sx={{ py: 0.7 }} />}

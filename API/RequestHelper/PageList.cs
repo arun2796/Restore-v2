@@ -21,7 +21,7 @@ public class PageList<T> : List<T>
     }
     public PaginationMetaData MetaData { get; set; }
 
-    public static async Task<PageList<T>> ToPageList(IQueryable<T> query, int pageNumber, int pageSize)
+    public static async Task<PageList<T>>ToPageList(IQueryable<T> query, int pageNumber, int pageSize)
     {
         var count = await query.CountAsync();
         var items = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();

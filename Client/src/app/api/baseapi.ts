@@ -5,11 +5,10 @@ import { toast } from "react-toastify";
 import { router } from "../routes/Routes";
 
 const customebaseurl=fetchBaseQuery({
-    baseUrl:"https://localhost:5166/api",
+    baseUrl:import.meta.env.VITE_API_URL,
     credentials:"include",
 
 });
-
 
 const sleep =()=> new Promise(solve=>setTimeout(solve,500));
 

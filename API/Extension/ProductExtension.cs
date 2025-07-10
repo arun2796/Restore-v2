@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace API.Extension;
 public static class ProductExtension
 {
-    public static IQueryable<Product> Sort(this IQueryable<Product> products, string? OrderBy)
+    public static IQueryable<Product>Sort(this IQueryable<Product> products, string? OrderBy)
     {
         products = OrderBy switch
         {

@@ -3,6 +3,7 @@ using API.Data;
 using API.DataInitial;
 using API.Middleware;
 using API.Model;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,7 @@ builder.Services.AddCors(options =>
 #endregion
 
 builder.Services.AddTransient<MiddlewareException>();
+builder.Services.AddScoped<PaymentServices>();
 
 builder.Services.AddIdentityApiEndpoints<User>(opt =>
 {
@@ -90,7 +92,7 @@ app.MapControllers();
 app.MapGroup("/api").MapIdentityApi<User>();
 
 // Update the database and seed data
- UpdateDatabaseAsync(app);
+UpdateDatabaseAsync(app);
 
 app.Run();
 

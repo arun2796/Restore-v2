@@ -11,14 +11,9 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : BaseApiController
+    public class ProductController(AppDbContext dbContext) : BaseApiController
     {
-        private readonly AppDbContext _dbContext;
-
-        public ProductController(AppDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        private readonly AppDbContext _dbContext = dbContext;
 
         [HttpGet]
 
@@ -53,9 +48,7 @@ namespace API.Controllers
             {
                 return NotFound("No record is found");
             }
-
             return context;
-
         }
     }
 }

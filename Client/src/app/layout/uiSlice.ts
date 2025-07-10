@@ -4,9 +4,6 @@ const getinitialdarkMode=()=>{
     const startdarkmode=localStorage.getItem('darkmode')
     return startdarkmode?JSON.parse(startdarkmode):true
 }
-    
-
-
 export const uislice =createSlice({
     name:'ui',
     initialState:{

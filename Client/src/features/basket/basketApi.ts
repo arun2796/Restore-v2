@@ -3,6 +3,7 @@ import { baseQueryWithError } from "../../app/api/baseapi";
 import { Item, type Basket } from "../../app/models/Basket";
 import type { IProduct } from "../../app/models/product";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 const IsBasktItems = (product: IProduct | Item): product is Item => {
     return (product as Item).quantity !== undefined;
@@ -81,8 +82,16 @@ export const basketApi =createApi({
                 }
             },
             
+        }),clearBasket:builder.mutation<void,void>({
+            queryFn:()=>({data:undefined}),
+            onQueryStarted:async (_, {dispatch})=>{
+                dispatch(basketApi.util.updateQueryData("fetchBasket",undefined,(draft)=>{
+                    draft.items=[];
+                }));
+                Cookies.remove("basketId");
+            }
         })
     })
 });
 
-export const { useFetchBasketQuery,useAddBasketItemMutation,useRemoveBasketItemMutation}=basketApi
+export const { useFetchBasketQuery,useAddBasketItemMutation,useRemoveBasketItemMutation,useClearBasketMutation}=basketApi

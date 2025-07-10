@@ -59,6 +59,7 @@ namespace API.Controllers
             .ThenInclude(x => x.Products)
             .FirstOrDefaultAsync(x => x.BasketId == Request.Cookies["basketId"]);
         }
+
         private Basket CreateBasket()
         {
             var basketId = Guid.NewGuid().ToString();

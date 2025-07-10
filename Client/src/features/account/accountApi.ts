@@ -1,9 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithError } from "../../app/api/baseapi";
-import type { User } from "../../app/models/User";
+
 import type { LoginSchema } from "../lib/schemas/loginschemas";
 import { router } from "../../app/routes/Routes";
 import { toast } from "react-toastify";
+import type { Address, User } from "../../app/models/User";
+
 
 export const AccountApi=createApi({
   reducerPath: "accountApi", 
@@ -25,8 +27,7 @@ export const AccountApi=createApi({
                 toast.success("Login successful!");
             } catch (error) {
                 console.error("Login failed:", error);
-                toast.error("Login failed. Please check your credentials.");
-                
+                toast.error("Login failed. Please check your credentials."); 
             }
         }
     }),
@@ -70,7 +71,37 @@ export const AccountApi=createApi({
                 dispatch(AccountApi.util.invalidateTags(["user-info"]));
                 router.navigate("/")
         }
+    }),
+    fetchAddress:builder.query<Address,void>({
+        query:()=>({
+            url:'account/address',
+            method:"GET"
+        })
+    }),
+    UpdateUserAddress:builder.mutation<Address,Address>({
+        query:(Address)=>{
+            return {
+                url:'account/address',
+                method:"Post",
+                body:Address
+            }
+        },
+       onQueryStarted:async (Address,{dispatch ,queryFulfilled})=>{
+         const patchresult=dispatch(
+            AccountApi.util.updateQueryData("fetchAddress",undefined,(draft)=>{
+                Object.assign(draft,{...Address})
+            })
+         );
+         try {
+            await queryFulfilled;    
+         } catch (error) {
+            patchresult.undo();
+            console.log(error);
+         }
+       }
     })
+    
     })})
 
-    export const { useLoginMutation, useRegisterMutation, useUserinfoQuery, useLogoutMutation ,useLazyUserinfoQuery} = AccountApi;
+    export const { useLoginMutation, useRegisterMutation, useUserinfoQuery,
+         useLogoutMutation ,useLazyUserinfoQuery,useFetchAddressQuery, useUpdateUserAddressMutation } = AccountApi;
