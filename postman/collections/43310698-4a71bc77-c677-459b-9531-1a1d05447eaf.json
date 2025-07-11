@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "43310698-4a71bc77-c677-459b-9531-1a1d05447eaf",
+		"name": "RestoreTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "section 6",
+			"item": [
+				{
+					"name": "not found",
+					"id": "43310698-6fd2fab2-690f-42b6-a879-a075675f5c10",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5166/api/buggy/Not-found",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"buggy",
+								"Not-found"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bad Request",
+					"id": "43310698-f48196cd-e507-413a-b887-4e1f1656ba7c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5166/api/buggy/Bad-Request",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"buggy",
+								"Bad-Request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized",
+					"id": "43310698-0a04ca97-bb7b-401d-9007-f21db31e98c5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5166/api/buggy/Unauthorized",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"buggy",
+								"Unauthorized"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validation error",
+					"id": "43310698-82ec3313-254a-4209-90ca-8e44703db10b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5166/api/buggy/Validation-error",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"buggy",
+								"Validation-error"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "server-error",
+					"id": "43310698-6c951a7f-7ba4-45db-85b4-6befdfa87d6a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5166/api/buggy/Server-error",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"buggy",
+								"Server-error"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get productbyId",
+					"id": "43310698-d2ec7b39-10b2-45d0-890b-49969f8fb9e9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "43310698-e4cdb8a0-63e7-4d41-a781-0d657b2b09f9"
+		},
+		{
+			"name": "basket",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "43310698-0cd1b4b5-a603-4db7-b49e-18e4785b5e9c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "view the basket",
+					"id": "43310698-a05c1bed-e761-4bb3-9a4a-b66888c37c6b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"id": "43310698-813d01bc-6e4c-452f-8c87-0128bd531bcd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"id": "43310698-7ed93e1c-8bf5-454f-9b89-6ff64d258e26",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "43310698-059a9ff8-7afd-4617-8167-655fd152de8c"
+		},
+		{
+			"name": "section 8",
+			"item": [
+				{
+					"name": "get product orderby",
+					"id": "43310698-95216ee4-c2a7-4b92-a845-2939b011c2f1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "search name",
+					"id": "43310698-5f3b199d-a624-4589-9d5b-10f0d0ac22fb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5166/api/product?searchName=red",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"product"
+							],
+							"query": [
+								{
+									"key": "searchName",
+									"value": "red"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "name",
+					"id": "43310698-74a4236a-ae72-4f30-ac5a-3d865ab2f7eb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Filter",
+					"id": "43310698-31376bef-55dc-46b8-a4de-8ba6196d282d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "pagination",
+					"id": "43310698-909708be-0682-4882-a976-90b1753c2828",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5166/api/Product?PageNumber=1&PageSize=6&brand=Angular&orderBy=pricedesc\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"Product"
+							],
+							"query": [
+								{
+									"key": "PageNumber",
+									"value": "1"
+								},
+								{
+									"key": "PageSize",
+									"value": "6"
+								},
+								{
+									"key": "brand",
+									"value": "Angular"
+								},
+								{
+									"key": "orderBy",
+									"value": "pricedesc\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New brand filter",
+					"id": "43310698-899832ce-eccd-4aca-83bb-8413015eb656",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "43310698-b000fa28-27f0-4d45-8c8c-9adb947fecbc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "43310698-b919d183-5581-4a8f-8665-063c90ff8111"
+		},
+		{
+			"name": "userlogin",
+			"item": [
+				{
+					"name": "login",
+					"id": "43310698-0d16cd48-ff58-4a08-9718-1d25269eb0cb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"id": "43310698-7694ffda-7af2-494d-923f-c6ee90f04d09",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\": \"Pa$$w0rd\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5166/api/account/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5166",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cookies",
+					"id": "43310698-29cf1238-aa25-4fa0-99f3-51440053d6f3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "manage/info",
+					"id": "43310698-8e4c43b3-2686-458e-a333-9d98ccd73e90",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "43310698-58473fa0-5bab-46c0-b884-5d097aea5148",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update address",
+					"id": "43310698-12945d63-e0ee-458f-a5b5-30b21cb6dd6f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "43310698-57f795db-7ad9-4f26-a7e1-cad9954137ee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "43310698-336dd188-7db4-471b-a844-a7749fd1a7d2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "43310698-3d09d234-31cf-4c7a-8b65-797ff28abe08",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "43310698-71ff0da8-1633-4c07-9832-5eb51b43e4f8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "43310698-6f5f459c-99f9-4852-b02f-8fd1b7eb13ee"
+		},
+		{
+			"name": "New Request",
+			"id": "43310698-1f2e419a-4ddf-47bb-84c9-b541cb21c0ed",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
