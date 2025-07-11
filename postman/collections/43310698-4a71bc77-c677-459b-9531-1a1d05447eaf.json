@@ -510,7 +510,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "get_id_detail",
 					"id": "43310698-9af7b553-faf5-407b-b3e2-d72b0655b7f2",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
