@@ -438,7 +438,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "payment",
 					"id": "43310698-57f795db-7ad9-4f26-a7e1-cad9954137ee",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
