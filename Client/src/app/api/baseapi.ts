@@ -31,7 +31,9 @@ export const baseQueryWithError=async ( arg:string| FetchArgs,api:BaseQueryApi,e
      switch (statusCode) {
         case 400:
             if(typeof responsedata==="string")toast.error(responsedata )
-                else if( 'errors' in responsedata){
+
+            else if( 'errors' in responsedata)
+              {
             throw Object.values(responsedata.errors).flat().join(',');
             }
             else{

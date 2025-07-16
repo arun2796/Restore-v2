@@ -14,13 +14,13 @@ public class PaymentServices(IConfiguration configuration)
         var Services = new PaymentIntentService();
         var intent = new PaymentIntent();
         var subtotal = basket.Items.Sum(x => x.Quantity * x.Products.Price);
-        var deliveryfee = subtotal > 1000 ? 0 : 500;
+        var deliveryfee = subtotal > 10000 ? 0 : 5000;
 
         if (string.IsNullOrEmpty(basket.PaymentIntentId))
         {
             var option = new PaymentIntentCreateOptions
             {
-                Amount = subtotal + deliveryfee,
+                Amount = subtotal + deliveryfee,   
                 Currency = "usd",
                 PaymentMethodTypes = [ "card"],
 

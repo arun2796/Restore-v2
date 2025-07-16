@@ -32,6 +32,7 @@ import { useBasket } from "../lib/hooks/useBasket";
 import { Currency } from "../lib/unit";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { useCreateOrderMutation } from "../order/orderApi";
 
 const step = ["Address", "Payment", "Review"];
 export default function CheckoutStepper() {
@@ -39,6 +40,7 @@ export default function CheckoutStepper() {
     useFetchAddressQuery();
   const [actionstep, setActionstep] = useState(0);
   const [UpdateAddress] = useUpdateUserAddressMutation();
+  const [CreateOrder] = useCreateOrderMutation();
   const [SaveAddress, setSaveAddress] = useState(false);
   const elements = useElements();
   const stripe = useStripe();
@@ -84,6 +86,8 @@ export default function CheckoutStepper() {
     try {
       if (!confirmationtoken || !basket?.clientSecret)
         throw new Error("No confirmation token or client secret found");
+      const orderMode = await createOrderModule();
+      const orderResult = await CreateOrder(orderMode);
       const paymentResult = await stripe?.confirmPayment({
         clientSecret: basket.clientSecret,
         redirect: "if_required",
@@ -91,7 +95,7 @@ export default function CheckoutStepper() {
       });
       if (paymentResult?.paymentIntent?.status === "succeeded") {
         toast.success("Payment successful!");
-        navigation("/checkout/success");
+        navigation("/checkout/success", { state: orderResult });
         clearBasket();
       } else if (paymentResult?.error) {
         throw new Error(paymentResult.error.message);
@@ -108,6 +112,16 @@ export default function CheckoutStepper() {
       setSubmitting(false);
     }
   };
+
+  const createOrderModule = async () => {
+    const ShippingAddress = await getStripeAddress();
+    const PaymentSummary = confirmationtoken?.payment_method_preview.card;
+
+    if (!ShippingAddress || !PaymentSummary)
+      throw new Error("Problem in creating Order");
+    return { ShippingAddress, PaymentSummary };
+  };
+
   const getStripeAddress = async () => {
     const addressElement = elements?.getElement("address");
     if (!addressElement) return null;
@@ -162,6 +176,9 @@ export default function CheckoutStepper() {
             }
             label="save as default address"
           />
+          <Typography variant="subtitle2" color="textSecondary">
+            Please enter your shipping address.
+          </Typography>
         </Box>
         <Box sx={{ display: actionstep === 1 ? "block" : "none" }}>
           <PaymentElement

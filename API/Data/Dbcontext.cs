@@ -1,5 +1,6 @@
 using System;
 using API.Model;
+using API.Model.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,12 @@ public class AppDbContext : IdentityDbContext<User>
     {
 
     }
-    public DbSet<Product> Products { get; set; }
+    public required DbSet<Product> Products { get; set; }
 
-    public DbSet<Basket> Baskets { get; set; }
+    public required DbSet<Basket> Baskets { get; set; }
 
     public DbSet<BasketItem> BasketItems { get; set; }
+    public required DbSet<Order> Orders { get; set; }
 
     override protected void OnModelCreating(ModelBuilder modelBuilder)
     {

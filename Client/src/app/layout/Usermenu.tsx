@@ -10,6 +10,7 @@ import { useState } from "react";
 import type { User } from "../models/User";
 import { History, Logout, Person } from "@mui/icons-material";
 import { useLogoutMutation } from "../../features/account/accountApi";
+import { Link } from "react-router";
 type prpos = {
   user: User;
 };
@@ -53,7 +54,7 @@ export default function Usermenu({ user }: prpos) {
           </ListItemIcon>
           <ListItemText>My Profile</ListItemText>
         </MenuItem>
-        <MenuItem>
+        <MenuItem component={Link} to={"/order"}>
           <ListItemIcon>
             <History />
           </ListItemIcon>
