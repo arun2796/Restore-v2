@@ -414,7 +414,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "userinfo",
 					"id": "43310698-58473fa0-5bab-46c0-b884-5d097aea5148",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
