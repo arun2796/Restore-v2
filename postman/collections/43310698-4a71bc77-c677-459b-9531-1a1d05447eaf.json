@@ -522,7 +522,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "image",
 					"id": "43310698-68e067fa-876d-4e19-94af-9f371e1fe3e4",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
