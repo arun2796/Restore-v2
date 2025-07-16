@@ -48,7 +48,7 @@ builder.Services.AddIdentityApiEndpoints<User>(opt =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-static async void UpdateDatabaseAsync(IHost host)
+static async Task UpdateDatabaseAsync(IHost host)
 {
     using var scope = host.Services.CreateScope();
     var Service = scope.ServiceProvider;
@@ -73,6 +73,9 @@ static async void UpdateDatabaseAsync(IHost host)
 var app = builder.Build();
 app.UseMiddleware<MiddlewareException>();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseCors("CustomPolicy");
 
 
@@ -90,9 +93,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapGroup("/api").MapIdentityApi<User>();
+app.MapFallbackToController("Index", "Fallback");
 
 // Update the database and seed data
-UpdateDatabaseAsync(app);
+await UpdateDatabaseAsync(app);
 
 app.Run();
 

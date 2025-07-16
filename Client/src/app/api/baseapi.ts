@@ -16,7 +16,7 @@ type ErropResponse=string|{title:string}|{errors:string[]}| { title: string; sta
 
 export const baseQueryWithError=async ( arg:string| FetchArgs,api:BaseQueryApi,extraoption:object)=>{
      api.dispatch(StartLoading());
-    await sleep()
+    if (import.meta.env.DEV)await sleep()
     const result= await customebaseurl(arg,api,extraoption)
    api.dispatch(StopLoading());
 
