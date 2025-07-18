@@ -20,9 +20,9 @@ public class PaymentServices(IConfiguration configuration)
         {
             var option = new PaymentIntentCreateOptions
             {
-                Amount = subtotal + deliveryfee,   
+                Amount = subtotal + deliveryfee,
                 Currency = "usd",
-                PaymentMethodTypes = [ "card"],
+                PaymentMethodTypes = ["card"],
 
             };
             intent = await Services.CreateAsync(option);
