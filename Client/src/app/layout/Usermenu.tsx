@@ -8,8 +8,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import type { User } from "../models/User";
-import { History, Logout, Person } from "@mui/icons-material";
+import { History, Inventory2, Logout, Person } from "@mui/icons-material";
 import { useLogoutMutation } from "../../features/account/accountApi";
+import { Link } from "react-router";
+
 type prpos = {
   user: User;
 };
@@ -53,12 +55,20 @@ export default function Usermenu({ user }: prpos) {
           </ListItemIcon>
           <ListItemText>My Profile</ListItemText>
         </MenuItem>
-        <MenuItem>
+        <MenuItem component={Link} to={"/order"}>
           <ListItemIcon>
             <History />
           </ListItemIcon>
           <ListItemText>My Order</ListItemText>
         </MenuItem>
+        {user.roles.includes("Member") && (
+          <MenuItem component={Link} to={"/inventory"}>
+            <ListItemIcon>
+              <Inventory2 />
+            </ListItemIcon>
+            <ListItemText>Inventory</ListItemText>
+          </MenuItem>
+        )}
         <Divider />
         <MenuItem onClick={() => logout()}>
           <ListItemIcon>

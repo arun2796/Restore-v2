@@ -1,6 +1,8 @@
-using System;
+
+using System.Reflection.Metadata.Ecma335;
 using API.DTO;
 using API.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Extension;
 
@@ -11,8 +13,9 @@ public static class BasketExtensionDto
         return new BasketDto
         {
             BasketId = basket.BasketId,
-
-            Items =  basket.Items.Select(x => new BasketItemDto
+            ClientSecret = basket.ClientSecret,
+            PaymentIntentId = basket.PaymentIntentId,
+            Items = basket.Items.Select(x => new BasketItemDto
             {
                 ProductId = x.ProductId,
                 Name = x.Products.Name,
@@ -24,5 +27,13 @@ public static class BasketExtensionDto
             }).ToList(),
         };
 
+    }
+
+    public static async Task<Basket> GetBasketWithItem(this IQueryable<Basket> query, string? basketId)
+    {
+        return await query
+        .Include(x => x.Items)
+        .ThenInclude(x => x.Products)
+        .FirstOrDefaultAsync(x => x.BasketId == basketId) ?? throw new Exception("cannot get basket");
     }
 }

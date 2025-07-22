@@ -41,7 +41,7 @@ export default function RegisterForm() {
             setError("email", { message: e });
           } else if (e.includes("password")) {
             setError("password", { message: e });
-          }
+          }  
         });
       }
     }

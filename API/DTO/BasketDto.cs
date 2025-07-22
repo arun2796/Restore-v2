@@ -9,5 +9,10 @@ public class BasketDto
 
     public required List<BasketItemDto> Items { get; set; } = [];
 
+
+    public string? ClientSecret { get; set; }
+
+    public string? PaymentIntentId { get; set; }
+
 }
 

@@ -1,17 +1,21 @@
-using System.Threading.Tasks;
 using API.Data;
 using API.DataInitial;
 using API.Middleware;
 using API.Model;
+using API.RequestHelper;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+// builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSetting"));
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
 builder.Services.AddControllers();
 
 #region  DBconnection
@@ -19,6 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    
 }
 );
 #endregion 
@@ -32,8 +37,13 @@ builder.Services.AddCors(options =>
          .AllowAnyMethod()
     ));
 #endregion
+builder.Services.AddAutoMapper(cfg =>
+{ }, AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddTransient<MiddlewareException>();
+builder.Services.AddScoped<PaymentServices>();
+builder.Services.AddScoped<ImageServices>();
+
 
 builder.Services.AddIdentityApiEndpoints<User>(opt =>
 {
@@ -46,7 +56,7 @@ builder.Services.AddIdentityApiEndpoints<User>(opt =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-static async void UpdateDatabaseAsync(IHost host)
+static async Task UpdateDatabaseAsync(IHost host)
 {
     using var scope = host.Services.CreateScope();
     var Service = scope.ServiceProvider;
@@ -71,6 +81,9 @@ static async void UpdateDatabaseAsync(IHost host)
 var app = builder.Build();
 app.UseMiddleware<MiddlewareException>();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseCors("CustomPolicy");
 
 
@@ -88,9 +101,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapGroup("/api").MapIdentityApi<User>();
+app.MapFallbackToController("Index", "Fallback");
 
 // Update the database and seed data
- UpdateDatabaseAsync(app);
+await UpdateDatabaseAsync(app);
 
 app.Run();
 
