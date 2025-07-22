@@ -61,7 +61,7 @@ export default function Usermenu({ user }: prpos) {
           </ListItemIcon>
           <ListItemText>My Order</ListItemText>
         </MenuItem>
-        {user.roles.includes("Admin") && (
+        {user.roles.includes("Member") && (
           <MenuItem component={Link} to={"/inventory"}>
             <ListItemIcon>
               <Inventory2 />

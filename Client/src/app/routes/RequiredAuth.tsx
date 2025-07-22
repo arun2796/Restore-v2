@@ -12,7 +12,7 @@ export default function RequiredAuth() {
 
   if (
     accountAdmin.includes(location.pathname) &&
-    !user.roles.includes("Admin")
+    !user.roles.includes("Member")
   ) {
     return <Navigate to="/" replace />;
   }
