@@ -20,9 +20,9 @@ public class PaymentServices(IConfiguration configuration)
         {
             var option = new PaymentIntentCreateOptions
             {
-                Amount = subtotal + deliveryfee,   
+                Amount = subtotal + deliveryfee,
                 Currency = "usd",
-                PaymentMethodTypes = [ "card"],
+                PaymentMethodTypes = ["card"],
 
             };
             intent = await Services.CreateAsync(option);
@@ -43,3 +43,9 @@ public class PaymentServices(IConfiguration configuration)
 
 
 //"DefaultConnection": "Server=ARUNKUMAR\\SQLEXPRESS;Database=NewRestore;Trusted_Connection=True;TrustServerCertificate=True"
+
+// "StripeSetting":{
+//   "PublishableKey":"pk_test_51RgfWiPIHDheeCVrqUNW7sDIRJI1gGTkamArnIZgLnkRR2ab2mCokyhzewqACZdpgT6AObLig34u2lfvsZuUFpCk00gsrsk7wz",
+//   "Secretkey":"sk_test_51RgfWiPIHDheeCVrIbSBggQo6m5SEOHtHrzXiEzqcqhRZHb7zpILoEIX2JoopYGpZELmIDhZiqVa7S4orbZoWffU00zJxZHHMU",
+//   "WhSecret":"whsec_60b1332ffb1b7f525bc6b059183c668a1ed8ceed08ab49d2194063e2b9bbdc42"
+// }

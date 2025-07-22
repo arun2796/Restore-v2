@@ -1,18 +1,21 @@
-using System.Threading.Tasks;
 using API.Data;
 using API.DataInitial;
 using API.Middleware;
 using API.Model;
+using API.RequestHelper;
 using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+// builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSetting"));
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
 builder.Services.AddControllers();
 
 #region  DBconnection
@@ -20,6 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    
 }
 );
 #endregion 
@@ -33,9 +37,13 @@ builder.Services.AddCors(options =>
          .AllowAnyMethod()
     ));
 #endregion
+builder.Services.AddAutoMapper(cfg =>
+{ }, AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddTransient<MiddlewareException>();
 builder.Services.AddScoped<PaymentServices>();
+builder.Services.AddScoped<ImageServices>();
+
 
 builder.Services.AddIdentityApiEndpoints<User>(opt =>
 {
