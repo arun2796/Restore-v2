@@ -549,7 +549,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "coupon",
 			"id": "43310698-293fc67e-9455-45ba-893a-2e4d8c46d56a",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
