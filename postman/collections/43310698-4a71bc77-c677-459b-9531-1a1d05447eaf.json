@@ -534,7 +534,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "basketadd",
 					"id": "43310698-a238893a-4b4a-45a7-ae43-e3c732bb96fe",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
